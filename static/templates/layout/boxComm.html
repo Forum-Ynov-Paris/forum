@@ -1,0 +1,28 @@
+{{define "boxComment"}}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/boxComm.css">
+</head>
+
+    <form action="/topic?top={{ .ID}}" method="post">
+        <div class="wrapper_" id="wrapper_">
+            <h1>Commentaire :</h1>
+            <div class="input-box_">
+                <div class="tweet-area_">>
+                    <textarea class="textarea" name="Comment" id="" cols="20" rows="1"></textarea>
+                </div>
+                <div class="privacy"></div>
+            </div>
+            <div class="bottom">
+                <ul class="icons"></ul>
+                <div class="content_">
+                    <button type="submit">POST !</button>
+                </div>
+            </div>
+        </div>
+    </form>
+{{end}}

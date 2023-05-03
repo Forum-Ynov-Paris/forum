@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../static/images/icon.png">
+    <link rel="stylesheet" href="../static/css/error.css">
+    <title>404</title>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:500|Roboto|Mukta" rel="stylesheet">
+    <meta property="og:site_name" content="wave.ac" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<div id="bubbles"></div>
+  
+<body>
+   {{template "sidebar"}} {{template "header" .Connected}}
+
+  <div id="app-mount">
+     <div id="text-section">
+        <p id="info">PAGE NON TROUVÉE !</p>
+        <p id="error">404</p>
+     </div>
+
+     <div id="links">
+        <p id="rand-quote"></p>
+     </div>
+
+     <a id="back-to-safety" href="http://localhost:8080"><img src="https://cdn.discordapp.com/attachments/217459438452211722/367088105452339202/if_home_216242.png" draggable="false" id="home-ico" />Retour à la casa !</a>
+  </div>
+</body>
+</html>

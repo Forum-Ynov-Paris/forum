@@ -1,0 +1,23 @@
+{{define "actus"}}
+
+<head>
+    <link rel="stylesheet" href="../static/css/actus.css">
+</head>
+
+    <div class="zoneactus">
+        <h2 class="fil_actu">Fil d'actu</h2>
+      {{range .Posts}}  
+        <a href="/topic?top={{.Topic_ID}}">
+            <div class="zone">
+                <i class="utilisateur"> @{{.User_pseudo}}</i>
+
+                <div class="lepost">{{.Content}}</div>
+
+        </div>
+    </a>
+        <hr>
+
+        {{end}}
+    </div>
+
+{{end}}

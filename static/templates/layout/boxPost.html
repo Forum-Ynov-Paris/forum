@@ -1,0 +1,22 @@
+{{define "boxpost"}}
+<link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/css/boxPost.css">
+
+<form action="/topic?top={{.ID}}" method="post">
+    <div class="wrapper" id="wrapper">
+        <h1>Post :</h1>
+        <div class="input-box">
+            <div class="tweet-area">
+                <textarea name="Post" id="" cols="20" rows="1"></textarea>
+            </div>
+            <div class="privacy"></div>
+        </div>
+        <div class="bottom">
+            <ul class="icons"></ul>
+            <div class="content">
+                <button type="submit">POST !</button>
+            </div>
+        </div>
+    </div>
+</form>
+{{end}}
