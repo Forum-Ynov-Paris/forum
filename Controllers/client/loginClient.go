@@ -3,6 +3,7 @@ package Forum
 import (
 	DB "Forum/Controllers/DB"
 	"fmt"
+	"github.com/gorilla/sessions"
 	"html/template"
 	"net/http"
 )
@@ -15,8 +16,13 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func LoginPost(db DB.DBController) {
+func LoginPost(db DB.DBController, store *sessions.CookieStore) {
 	http.HandleFunc("/api/login", func(w http.ResponseWriter, r *http.Request) {
+		session, err1 := store.Get(r, "forum")
+		if err1 != nil {
+			http.Error(w, err1.Error(), http.StatusInternalServerError)
+			return
+		}
 		if r.Method == "POST" {
 			pseudo := r.FormValue("pseudo")
 			spassword := r.FormValue("password")
@@ -29,8 +35,14 @@ func LoginPost(db DB.DBController) {
 					fmt.Println("Login failed")
 					print(err)
 				} else {
-					fmt.Println("Login success")
-					//TODO: Create session
+					session.Values["authenticated"] = true
+					session.Values["username"] = pseudo // remplacer avec le nom d'utilisateur réel
+					err2 := session.Save(r, w)
+					if err2 != nil {
+						http.Error(w, err.Error(), http.StatusInternalServerError)
+						return
+					}
+					http.Redirect(w, r, "/", http.StatusSeeOther)
 				}
 			}
 
