@@ -31,18 +31,22 @@
 	</nav>
     <br>
 	<main>
+		{{ if .Posts }}
+		{{ range .Posts }}
 		<section class="post">
-            <h2>Titre du post</h2>
-            <p>Description du post</p>
-            <p>Posté par <span class="username">Nom d'utilisateur</span></p>
-            <div class="like-dislike">
-                <button class="like">J'aime</button>
-                <button class="dislike">Je n'aime pas</button>
-            </div>
-            <a href="./static/post.html">Lire la suite</a>
-        </section>
-        
-		<!-- plus de sections de post ici -->
+			<h2>{{ .Title }}</h2>
+			<p>{{ .Content }}</p>
+			<p>Posté par <span class="username">{{ .Uuid }}</span></p>
+			<div class="like-dislike">
+				<button class="like">J'aime</button>
+				<button class="dislike">Je n'aime pas</button>
+			</div>
+			<a href="./post/post.html">Lire la suite</a>
+		</section>
+		{{ end }}
+		{{ else }}
+		<p>Aucun post disponible pour le moment.</p>
+		{{ end }}
 	</main>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package Forum
 
 import (
+	API "Forum/Controllers/API"
 	DB "Forum/Controllers/DB"
 	"github.com/gorilla/sessions"
 	"html/template"
@@ -9,12 +10,15 @@ import (
 
 func HomeClient(db DB.DBController, store *sessions.CookieStore) {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+
 		session, err := store.Get(r, "forum")
 		data := struct {
-			Name string
+			Name  string
+			Posts []API.Article
 		}{}
 		if session.Values["authenticated"] == true {
 			data.Name = session.Values["username"].(string)
+			data.Posts = API.GetArticles()
 		} else {
 			data.Name = "Guest"
 		}
