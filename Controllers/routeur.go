@@ -11,4 +11,5 @@ func Routeur(db DB.DBController) {
 	http.HandleFunc("/login", Client.Login)
 	http.HandleFunc("/register", Client.Register)
 	Client.LoginPost(db)
+	Client.RegisterPost(db)
 }

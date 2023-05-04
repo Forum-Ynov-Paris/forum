@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./static/css/inscription.css">
+
+    <title>Inscription</title>
+</head>
+<header>
+    <div class="logo">
+        <a onclick="location.href='./'">Forum</a>
+    </div>
+    <div class="search-bar">
+        <input type="text" placeholder="Rechercher...">
+        <button type="submit">Rechercher</button>
+    </div>
+    <div class="user-profile">
+        <a onclick="location.href='./login'">
+            <img src="./img/userlogo.png" alt="Avatar">
+            Nom de l'utilisateur
+        </a>
+    </div>
+</header>
+<body>
+    <form action="/api/register" method="POST" id="form">
+        <div class="connexion">
+            <div class="login-form">
+                <h1>Inscription</h1>
+                <div class="textb">
+
+                    <input type="text" id="firstname" name="firstname" required>
+
+                    <div class="placeholder">Firstname</div>
+                </div>
+                <div class="textb">
+
+                    <input type="text" id="lastname" name="lastname" required>
+
+                    <div class="placeholder">Lastname</div>
+                </div>
+                <div class="textb">
+
+                    <input type="text" id="pseudo" name="pseudo" required>
+
+                    <div class="placeholder">Pseudo</div>
+                </div>
+                <div class="textb">
+                    
+                    <input type="text" id="email" name="email" required>
+
+                    <div class="placeholder">Email</div>
+                </div>
+                <div class="textb">
+                    <input type="password" required id="password" name="password">
+                    <div class="placeholder">Mot de passe</div>
+                    <span onclick="showPassword()">
+                        <div class="show-password fas fa-eye-slash" id="slash"></div>
+                        <div class="show-password fas fa-eye" id="eye"></div>
+                    </span>
+                </div>
+
+
+                <a onclick="location.href='./login'">Déjà inscrit ? <br> Connecte-toi</a>
+                <div class="button_login">
+                    <a class="btn" onclick="formSubmit()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span> Register
+                        <i class='bx bxs-user-account'></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    <script src="../static/js/showPassword.js"></script>
+    <script src="../static/js/login&register.js"></script>
+    <script src="../static/js/popup.js"></script>
+</body>
+
+</html>

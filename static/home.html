@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Forum - Accueil</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="./static/css/home.css">
+</head>
+<body>
+    <br>
+	<header>
+		<div class="logo">
+			<a onclick="location.href='./'">Forum</a>
+		</div>
+		<div class="search-bar">
+			<input type="text" placeholder="Rechercher...">
+			<button type="submit">Rechercher</button>
+		</div>
+		<div class="user-profile">
+			<a onclick="location.href='./login'">
+				<img src="./static/img/userlogo.png" alt="Avatar">
+				Nom de l'utilisateur
+			</a>
+		</div>
+	</header>
+    <br>
+    <br>
+	<nav>
+		<ul>
+			<li><a href="./static/createpost.html">Créer un post</a></li>
+		</ul>
+	</nav>
+    <br>
+	<main>
+		<section class="post">
+            <h2>Titre du post</h2>
+            <p>Description du post</p>
+            <p>Posté par <span class="username">Nom d'utilisateur</span></p>
+            <div class="like-dislike">
+                <button class="like">J'aime</button>
+                <button class="dislike">Je n'aime pas</button>
+            </div>
+            <a href="./static/post.html">Lire la suite</a>
+        </section>
+        
+		<!-- plus de sections de post ici -->
+	</main>
+</body>
+</html>

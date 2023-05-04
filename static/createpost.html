@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" class="scroller ">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./css/createpost.css">
+    <title>Topic</title>
+</head>
+<header>
+    <div class="logo">
+        <a href="home.html">Forum</a>
+    </div>
+    <div class="search-bar">
+        <input type="text" placeholder="Rechercher...">
+        <button type="submit">Rechercher</button>
+    </div>
+    <div class="user-profile">
+        <a href="connexion.html">
+            <img src="./img/userlogo.png" alt="Avatar">
+            Nom de l'utilisateur
+        </a>
+    </div>
+</header>
+<body id="body">
+
+
+    <h1 class="categorie">CATÉGORIE :</h1>
+    <h1 class="sujet">NOM DU SUJET :</h1>
+    <div class="topic">
+
+        <div class="one_topic" id="topic">
+
+            <div class="description_topic borderTitle">
+                <div class="id">
+                    <div class="photo_profile"></div>
+                    <div class="pseudo">Pseudo</div>
+                </div>
+            </div>
+            <hr class="ligne">
+            <div class="commentaire_topic borderComment">
+                <div class="id">
+                    <div class="photo_profile"></div>
+                    <div class="pseudo"></div>
+                </div>
+                <p class="textComment"></p>
+                <div class="boutons">
+                    <form action="" method="POST">
+                        <input hidden name="post_id" value="{{.ID}}">
+                        <input hidden name="like" value=0>
+                        
+                    <button type="submit" name="status" value="1" class="like"><img src="./img/like_plein.png" alt="like plein"></button>
+           
+                    <button type="submit" name="status" value="-1" class="dislike"><img src="./img/dislike_plein.png" alt="like plein"></button>
+                
+                      
+                </form>
+                    <button class="reponse" onclick="createDiv('{{.ID}}')">Voir les réponses </button>
+
+                </div>
+                <div class="btn_comm">
+                    <button onclick="openAndClose_('{{.ID}}')">Répondre</button>
+                </div>
+                <form action="" method="post">
+                    <div class="wrapper_" id="wrapper_{{.ID}}">
+                        <h1>Répondre à @:</h1>
+                        <div class="input-box_">
+                            <div class="tweet-area_">
+                                <input hidden name="postID" value="{{.ID}}">
+                                <textarea class="textarea" name="Comment" id="" cols="20" rows="1"></textarea>
+                            </div>
+                            <div class="privacy"></div>
+                        </div>
+                        <div class="bottom">
+                            <ul class="icons"></ul>
+                            <div class="content_">
+                                <button type="submit">POST !</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="commentaire" id="visible_{{.ID}}" style="display:none">
+                    <div class="commentaryZone">
+                        <div class="id">
+                            <div class="photo_profile">pp</div>
+                            <div class="pseudo"></div>
+                        </div>
+                          
+
+                    </div>
+                    
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+    <script src="./js/Comments.js"></script>
+    <script src="./js/popup.js"></script>
+</body>
+
+</html>

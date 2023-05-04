@@ -8,7 +8,7 @@ import (
 )
 
 func Login(w http.ResponseWriter, r *http.Request) {
-	template := template.Must(template.ParseFiles("static/templates/login.html"))
+	template := template.Must(template.ParseFiles("static/connexion.html"))
 	err := template.Execute(w, nil)
 	if err != nil {
 		print(err)
@@ -18,14 +18,22 @@ func Login(w http.ResponseWriter, r *http.Request) {
 func LoginPost(db DB.DBController) {
 	http.HandleFunc("/api/login", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == "POST" {
-			firstName := r.FormValue("firstname")
-			lastName := r.FormValue("lastname")
-			email := r.FormValue("email")
 			pseudo := r.FormValue("pseudo")
-			password := r.FormValue("password")
-			hash, _ := DB.HashPassword(password)
-			fmt.Println(firstName, lastName, email, pseudo, password, hash)
-			db.POST("INSERT INTO user(firstname, lastname, email, pseudo, password) VALUES (?, ?, ?, ?, ?)", firstName, lastName, email, pseudo, hash)
+			spassword := r.FormValue("password")
+			rows, _ := db.QUERY("SELECT password FROM user WHERE pseudo = ?", pseudo)
+			for rows.Next() {
+				var password string
+				rows.Scan(&password)
+				err := DB.ComparePasswords(password, spassword)
+				if err != nil {
+					fmt.Println("Login failed")
+					print(err)
+				} else {
+					fmt.Println("Login success")
+					//TODO: Create session
+				}
+			}
+
 		}
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	})
