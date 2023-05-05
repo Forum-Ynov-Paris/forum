@@ -13,6 +13,16 @@ type DBController struct {
 	Database *sql.DB
 }
 
+func (dbc *DBController) GetUsername(uid int) string {
+	row, _ := dbc.Database.Query("SELECT pseudo FROM user WHERE id = ?", uid)
+	for row.Next() {
+		var pseudo string
+		row.Scan(&pseudo)
+		return pseudo
+	}
+	return ""
+}
+
 func (dbc *DBController) INIT(databaseName string) error {
 	var err error
 	dbc.Database, err = sql.Open("sqlite3", databaseName)

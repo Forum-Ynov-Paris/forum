@@ -12,7 +12,7 @@ import (
 
 type Commentaire struct {
 	Content string `json:"content"`
-	Uuid    string `json:"uuid"`
+	Uuid    int    `json:"uuid"`
 }
 
 type Article struct {
@@ -21,7 +21,7 @@ type Article struct {
 	Content     string        `json:"content"`
 	Upvote      int           `json:"upvote"`
 	Date        string        `json:"date"`
-	Uuid        string        `json:"uuid"`
+	Uuid        int           `json:"uuid"`
 	Commentaire []Commentaire `json:"commentaire"`
 }
 
