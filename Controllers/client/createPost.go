@@ -1,6 +1,7 @@
 package Forum
 
 import (
+	API "Forum/Controllers/API"
 	DB "Forum/Controllers/DB"
 	"github.com/gorilla/sessions"
 )
@@ -26,5 +27,6 @@ func CreatePost(store *sessions.CookieStore) {
 }
 
 func HandleCreatepost(db DB.DBController, store *sessions.CookieStore) {
-	//article := new(API.Article)
+	article := new(API.Article)
+	API.PostArticle(article)
 }
