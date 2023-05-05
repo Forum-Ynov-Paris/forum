@@ -1,5 +1,5 @@
 package static
 
 func Submit() {
-	document := document.getElementById("submit")
+	//document := document.getElementById("submit")
 }
