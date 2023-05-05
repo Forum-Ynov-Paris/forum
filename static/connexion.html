@@ -10,10 +10,12 @@
     <div class="logo">
         <a onclick="location.href='./'">Forum</a>
     </div>
-    <div class="search-bar">
-        <input type="text" placeholder="Rechercher...">
-        <button type="submit">Rechercher</button>
-    </div>
+    <form action="/search" method="POST">
+        <div class="search-bar">
+            <input type="text" id="search" name="search" placeholder="Rechercher...">
+            <button type="submit">Rechercher</button>
+        </div>
+    </form>
     <div class="user-profile">
         <a onclick="location.href='./login'">
             <img src="./static/img/userlogo.png" alt="Avatar">
@@ -24,48 +26,48 @@
 <body>
 
     
-    <form action="/api/login" method="POST" id="form">
-        <div class="connexion">
-            <div class="login-form">
-                <h1>Connexion</h1>
+<form action="/api/login" method="POST" id="form">
+    <div class="connexion">
+        <div class="login-form">
+            <h1>Connexion</h1>
 
-                <div class="textb">
+            <div class="textb">
                     
-                    <input type="text" id="pseudo" name="pseudo" required>
+                <input type="text" id="pseudo" name="pseudo" required>
                    
-                    <div class="placeholder">Pseudo</div>
-                </div>
-                <div class="textb">
-                    <input type="password" required id="password" name="password">
-                    <div class="placeholder">Mot de passe</div>
-                    <span onclick="showPassword()">
-                        <div class="show-password fas fa-eye-slash" id="slash"></div>
-                        <div class="show-password fas fa-eye" id="eye"></div>
-                    </span>
-                </div>
+                <div class="placeholder">Pseudo</div>
+            </div>
+            <div class="textb">
+                <input type="password" required id="password" name="password">
+                <div class="placeholder">Mot de passe</div>
+                <span onclick="showPassword()">
+                    <div class="show-password fas fa-eye-slash" id="slash"></div>
+                    <div class="show-password fas fa-eye" id="eye"></div>
+                </span>
+            </div>
            
-                <div id="box">
-                    <i class='bx bxs-info-circle' style='color:#f58900'></i>
-                    <a onclick="closes()" class="close">Fermer</a>
-                </div>
+            <div id="box">
+                <i class='bx bxs-info-circle' style='color:#f58900'></i>
+                <a onclick="closes()" class="close">Fermer</a>
+            </div>
               
-                <a onclick="location.href='./register'">Créer un compte</a>
-                <div class="button_login" >
-                    <a class="btn" onclick="formSubmit()">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span> Login
-                        <i class='bx bxs-log-in'></i>
-                    </a>
-                </div>
+            <a onclick="location.href='./register'">Créer un compte</a>
+            <div class="button_login" >
+                <a class="btn" onclick="formSubmit()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span> Login
+                    <i class='bx bxs-log-in'></i>
+                </a>
             </div>
         </div>
-    </form>
+    </div>
+</form>
 
-    <script src="../static/js/showPassword.js"></script>
-    <script src="../static/js/login&register.js"></script>
-    <script src="../static/js/popup.js"></script>
+<script src="../static/js/showPassword.js"></script>
+<script src="../static/js/login&register.js"></script>
+<script src="../static/js/popup.js"></script>
 </body>
 
 </html>

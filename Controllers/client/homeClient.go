@@ -15,7 +15,6 @@ type post struct {
 
 func HomeClient(db DB.DBController, store *sessions.CookieStore) {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-
 		articles := API.GetArticles()
 		Posts := make([]post, len(articles))
 		for i, article := range articles {
