@@ -35,6 +35,11 @@ func GetArticles() []Article {
 	return articles
 }
 
+func GetArticle(id int) Article {
+	Get()
+	return articles[id]
+}
+
 func Get() {
 	//open ./data.json and unmarshall it
 	file, err := os.Open(Path)
