@@ -11,9 +11,13 @@ import (
 func Post(w http.ResponseWriter, r *http.Request) {
 	type data struct {
 		post API.Article
+		Name string
 	}
 
-	Data := API.GetArticle(0) //changer + tard
+	Data := data{
+		API.GetArticle(0), //changer + tard
+		"Guest",
+	}
 
 	t, err := template.ParseFiles("./static/post.html")
 	if err != nil {
