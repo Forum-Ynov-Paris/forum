@@ -3,11 +3,13 @@ package Forum
 //replace the package main by the name of your package and delete main function
 
 import (
+	DB "Forum/Controllers/DB"
 	"bytes"
 	"encoding/json"
 	"io"
 	"log"
 	"os"
+	"strings"
 )
 
 type Commentaire struct {
@@ -74,4 +76,32 @@ func PostArticle(article Article) {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func SearchArticles(search string, db DB.DBController) []Article {
+	Get()
+	var articlesSearch []Article
+	for _, article := range articles {
+		if article.Title == search || article.Tag == search || strings.Contains(article.Title, search) {
+			articlesSearch = append(articlesSearch, article)
+		}
+	}
+	row, err := db.QUERY("SELECT id FROM user WHERE pseudo = ?", search)
+	if err != nil {
+		log.Fatal(err)
+	} else {
+		for row.Next() {
+			var id int
+			err = row.Scan(&id)
+			if err != nil {
+				log.Fatal(err)
+			}
+			for _, article := range articles {
+				if article.Uuid == id {
+					articlesSearch = append(articlesSearch, article)
+				}
+			}
+		}
+	}
+	return articlesSearch
 }

@@ -11,10 +11,12 @@
     <div class="logo">
         <a onclick="location.href='./'">Forum</a>
     </div>
-    <div class="search-bar">
-        <input type="text" placeholder="Rechercher...">
-        <button type="submit">Rechercher</button>
-    </div>
+    <form action="/search" method="POST">
+        <div class="search-bar">
+            <input type="text" id="search" name="search" placeholder="Rechercher...">
+            <button type="submit">Rechercher</button>
+        </div>
+    </form>
     <div class="user-profile">
         <a onclick="location.href='./login'">
             <img src="./img/userlogo.png" alt="Avatar">
