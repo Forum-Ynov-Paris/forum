@@ -1,23 +1,31 @@
 package Forum
 
 import (
-    "html/template"
-    "net/http"
+	API "Forum/Controllers/API"
+	DB "Forum/Controllers/DB"
+	"net/http"
 )
 
 func createPost(w http.ResponseWriter, r *http.Request) {
-    // Récupérer le nom d'utilisateur de la session
-    session, _ := store.Get(r, "session-name")
-    username := session.Values["username"].(string)
+	// Récupérer le nom d'utilisateur de la session
+	//session, _ := store.Get(r, "session-name")
+	//username := session.Values["username"].(string)
 
-    // Afficher le formulaire avec le nom d'utilisateur prérempli
-    tmpl, _ := template.ParseFiles("/static/createpost.html")
-    tmpl.Execute(w, map[string]interface{}{
-        "Username": username,
-    })
+	/*
+		t, err := template.ParseFiles("/static/createpost.html")
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		err = t.Execute(w, Data)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}*/
 }
 
-func main() {
-    http.HandleFunc("/static/createpost.html", createpost)
-    http.ListenAndServe(":8080", nil)
+func handleCreatepost(db DB.DBController, store *sessions.CookieStore) {
+	article := new(API.Article)
+	API.PostArticle(article)
 }
