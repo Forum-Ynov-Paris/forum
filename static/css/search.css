@@ -1,0 +1,230 @@
+/* Réinitialisation de la feuille de styles par défaut */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background: #303841;
+}
+
+/* Styles pour l'en-tête du site */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #6c22ff; /* Violet */
+    color: #fff;
+    padding: 1em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 1em 1em 1em 1em;
+}
+
+.home {
+    min-height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    font-size: 1.2em;
+    margin-right: 1em;
+}
+
+.logo a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+input[type="text"] {
+    padding: 0.5em;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+button[type="submit"] {
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #6c22ff; /* Violet */
+    font-weight: bold;
+    margin-left: 0.5em;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #6c22ff; /* Violet */
+    color: #fff;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    margin-left: 1em;
+}
+
+.user-profile a {
+    color: #fff; /* Blanc */
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.user-profile img {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    margin-right: 0.5em;
+}
+
+
+.user-profile a:hover {
+    text-decoration: none;
+    background-color: #fff; /* Blanc */
+    color: #6c22ff; /* Violet */
+}
+
+
+/* Styles pour la barre de navigation */
+nav {
+    background-color: #6c22ff; /* Violet */
+    padding: 1em;
+    border-radius: 1em 1em 1em 1em;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    margin-right: 1em;
+}
+
+nav a {
+    color: #fff; /* Blanc */
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    text-decoration: none;
+    background-color: #fff; /* Blanc */
+    color: #6c22ff; /* Violet */
+}
+
+/* Styles pour la section des posts */
+.post {
+    border-radius: 10px;
+    width: 1000px;
+    height: 230px;
+    padding: 1em;
+    margin-bottom: 1em;
+    background-color: #6c22ff;
+    color: #fff;
+}
+
+.container {
+    width: 1300px; /* Ajustez la largeur selon vos besoins */
+    height: 650px; /* Ajustez la hauteur selon vos besoins */
+    overflow: auto;
+    position: fixed;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.content {
+    padding: 20px;
+}
+
+/* Styling personnalisé pour la barre de défilement */
+.container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.container::-webkit-scrollbar-track {
+    background-color: #6c22ff;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background-color: #888;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+
+.post h2 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+    color: #fff;
+}
+
+.post p {
+    margin-bottom: 1em;
+    color: #fff;
+}
+
+.username {
+    font-weight: bold;
+    color: #fff;
+
+}
+
+.like-dislike {
+    display: flex;
+    gap: 1em;
+
+}
+
+.like,
+.dislike {
+    background-color: #6c22ff;
+    color: #fff;
+    border: none;
+    padding: 0.5em;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff; /* Blanc */
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.like:hover,
+.dislike:hover {
+    background-color: #fff; /* Blanc */
+    color: #6c22ff; /* Violet */
+}
+
+.like:active,
+.dislike:active {
+    background-color: #4818b8;
+}
+
+
+.post a:hover {
+    text-decoration: underline;
+    color: #fff;
+}
