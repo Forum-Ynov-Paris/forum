@@ -19,8 +19,7 @@ func CreatePost(db DB.DBController, store *sessions.CookieStore) {
 
 		session, err := store.Get(r, "forum")
 		data := struct {
-			Name  string
-			Posts []post
+			Name string
 		}{}
 		if session.Values["authenticated"] == true {
 			data.Name = session.Values["username"].(string)
@@ -44,7 +43,9 @@ func CreatePost(db DB.DBController, store *sessions.CookieStore) {
 		session, _ := store.Get(r, "forum")
 		username := session.Values["username"].(string)
 
+		fmt.Println("newpost")
 		if r.Method == "POST" {
+			fmt.Println("po")
 			title := r.FormValue("title")
 			content := r.FormValue("content")
 			tag := r.FormValue("tag")
@@ -59,8 +60,15 @@ func CreatePost(db DB.DBController, store *sessions.CookieStore) {
 						log.Fatal(err)
 					}
 					currentTime := time.Now()
-					fmt.Println(content)
-					Forum.AddPost(title, tag, content, currentTime.String(), id)
+					var date string
+					for _, i := range currentTime.String() {
+						if i != '.' {
+							date += string(i)
+						} else {
+							break
+						}
+					}
+					Forum.AddPost(title, tag, content, date, id)
 				}
 			}
 		}

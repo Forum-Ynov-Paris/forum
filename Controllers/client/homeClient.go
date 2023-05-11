@@ -24,14 +24,17 @@ func HomeClient(db DB.DBController, store *sessions.CookieStore) {
 
 		session, err := store.Get(r, "forum")
 		data := struct {
-			Name  string
-			Posts []post
+			Name      string
+			Connected bool
+			Posts     []post
 		}{}
 		if session.Values["authenticated"] == true {
 			data.Name = session.Values["username"].(string)
+			data.Connected = true
 			data.Posts = Posts
 		} else {
 			data.Name = "Guest"
+			data.Connected = false
 			data.Posts = Posts
 		}
 		t, err := template.ParseFiles("./static/home.html")

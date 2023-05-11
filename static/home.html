@@ -24,31 +24,44 @@
         </a>
     </div>
 </header>
-<br>
-<br>
-<nav>
-    <ul>
-        <li><a onclick="location.href='./newpost'">Créer un post</a></li>
-    </ul>
-</nav>
-<br>
-<main>
-    {{ if .Posts }}
-    {{ range .Posts }}
-    <section class="post">
-        <h2>{{ .Title }}</h2>
-        <p>{{ .Content }}</p>
-        <p>Posté par <span class="username">{{.Username}}</span></p>
-        <div class="like-dislike">
-            <button class="like">J'aime</button>
-            <button class="dislike">Je n'aime pas</button>
-        </div>
-        <a href="/post">Lire la suite</a>
-    </section>
-    {{ end }}
-    {{ else }}
-    <p>Aucun post disponible pour le moment.</p>
-    {{ end }}
-</main>
+<div class="container">
+    <div class="content">
+        <br>
+        <br>
+        <nav>
+            {{ if .Connected }}
+            <ul>
+                <li><a onclick="location.href='./newpost'">Créer un post</a></li>
+            </ul>
+            {{ else }}
+            <ul>
+                <li><a onclick="location.href='./login'">Créer un post</a></li>
+            </ul>
+            {{ end }}
+        </nav>
+        <br>
+        <main>
+            {{ if .Posts }}
+            {{ range .Posts }}
+            <div class="home">
+                <section class="post">
+                    <h2>{{ .Title }}</h2>
+                    <p>{{ .Content }}</p>
+                    <p>{{ .Date}}</p>
+                    <p>Posté par <span class="username">{{.Username}}</span></p>
+                    <div class="like-dislike">
+                        <button class="like">J'aime</button>
+                        <button class="dislike">Je n'aime pas</button>
+                    </div>
+                    <a href="/post">Lire la suite</a>
+                </section>
+            </div>
+            {{ end }}
+            {{ else }}
+            <p>Aucun post disponible pour le moment.</p>
+            {{ end }}
+        </main>
+    </div>
+</div>
 </body>
 </html>
