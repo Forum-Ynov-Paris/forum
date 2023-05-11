@@ -4,9 +4,9 @@ package Forum
 
 import (
 	DB "Forum/Controllers/DB"
-	"bytes"
 	"encoding/json"
-	"io"
+	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 	"strings"
@@ -62,27 +62,6 @@ func Get() {
 	}
 }
 
-func PostArticle(article Article) {
-	Get()
-	articles = append(articles, article)
-
-	jsonData, err := json.Marshal(articles)
-	if err != nil {
-		panic(err)
-	}
-
-	//open ./data.json and write the new json
-	file, err := os.OpenFile(Path, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	_, err = io.Copy(file, bytes.NewReader(jsonData))
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 func SearchArticles(search string, db DB.DBController) []Article {
 	Get()
 	var articlesSearch []Article
@@ -109,4 +88,55 @@ func SearchArticles(search string, db DB.DBController) []Article {
 		}
 	}
 	return articlesSearch
+}
+
+func AddPost(titre string, tag string, content string, date string, uuid int) {
+	//Title       string        `json:"title"`
+	//Tag         string        `json:"tag"`
+	//Content     string        `json:"content"`
+	//Upvote      int           `json:"upvote"`
+	//Date        string        `json:"date"`
+	//Uuid        int           `json:"uuid"
+
+	// Charger le contenu JSON existant depuis un fichier
+	file, err := ioutil.ReadFile("data.json")
+	if err != nil {
+		fmt.Println("Erreur lors de la lecture du fichier:", err)
+		return
+	}
+
+	// Déclarer une variable pour stocker les données JSON
+	var people []Article
+
+	// Désérialiser le contenu JSON dans la variable
+	err = json.Unmarshal(file, &people)
+	if err != nil {
+		fmt.Println("Erreur lors de la désérialisation JSON:", err)
+		return
+	}
+
+	// Ajouter un nouvel élément au tableau JSON
+	newPerson := Article{
+		Title:   titre,
+		Tag:     tag,
+		Content: content,
+		Upvote:  0,
+		Date:    date,
+		Uuid:    uuid,
+	}
+	people = append(people, newPerson)
+
+	// Sérialiser les données en JSON
+	newData, err := json.MarshalIndent(people, "", "  ")
+	if err != nil {
+		fmt.Println("Erreur lors de la sérialisation JSON:", err)
+		return
+	}
+
+	// Écrire les données JSON dans le fichier
+	err = ioutil.WriteFile("data.json", newData, os.ModePerm)
+	if err != nil {
+		fmt.Println("Erreur lors de l'écriture dans le fichier:", err)
+		return
+	}
 }

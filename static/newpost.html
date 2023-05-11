@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" class="scroller ">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./static/css/newpost.css">
+    <title>Connexion</title>
+</head>
+<header>
+    <div class="logo">
+        <a onclick="location.href='./'">Forum</a>
+    </div>
+    <form action="/search" method="POST">
+        <div class="search-bar">
+            <input type="text" id="search" name="search" placeholder="Rechercher...">
+            <button type="submit">Rechercher</button>
+        </div>
+    </form>
+    <div class="user-profile">
+        <a onclick="location.href='./login'">
+            <img src="./static/img/userlogo.png" alt="Avatar">
+            {{.Name}}
+        </a>
+    </div>
+</header>
+<body>
+<form action="/api/newpost" method="POST" id="form">
+    <div class="connexion">
+        <div class="login-form">
+            <h1>Créer un post sur le forum</h1>
+            <div class="textb">
+                <input type="text" id="title" name="title" required>
+                <div class="placeholder">Titre</div>
+            </div>
+            <div class="textb">
+                <input type="text" id="content" name="content" required>
+                <div class="placeholder">Contenu</div>
+            </div>
+            <div class="textb">
+                <input type="text" id="tag" name="tag" required>
+                <div class="placeholder">Tags</div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="button_login">
+                <a class="btn" onclick="formSubmit()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span> Envoyer
+                </a>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="../static/js/login&register.js"></script>
+</body>
+</html>

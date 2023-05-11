@@ -49,4 +49,19 @@ func LoginPost(db DB.DBController, store *sessions.CookieStore) {
 		}
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	})
+	http.HandleFunc("/logout", func(w http.ResponseWriter, r *http.Request) {
+		session, err1 := store.Get(r, "forum")
+		if err1 != nil {
+			http.Error(w, err1.Error(), http.StatusInternalServerError)
+			return
+		}
+		session.Values["authenticated"] = false
+		session.Values["username"] = ""
+		err2 := session.Save(r, w)
+		if err2 != nil {
+			http.Error(w, err2.Error(), http.StatusInternalServerError)
+			return
+		}
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	})
 }

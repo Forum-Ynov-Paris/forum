@@ -32,6 +32,7 @@ func HomeClient(db DB.DBController, store *sessions.CookieStore) {
 			data.Posts = Posts
 		} else {
 			data.Name = "Guest"
+			data.Posts = Posts
 		}
 		t, err := template.ParseFiles("./static/home.html")
 		if err != nil {
