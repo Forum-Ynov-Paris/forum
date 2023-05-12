@@ -53,7 +53,13 @@
                         <button class="like">J'aime</button>
                         <button class="dislike">Je n'aime pas</button>
                     </div>
-                    <a href="/post">Lire la suite</a>
+                    <script>
+                        var url = document.getElementById("date").innerHTML;
+                        var url = url + "/" + document.getElementById("title").innerHTML;
+                        document.getElementById("id").innerHTML = url;
+                    </script>
+
+                    <a onclick="location.href='/post/' + url">Lire la suite</a>
                 </section>
             </div>
             {{ end }}

@@ -10,12 +10,10 @@ import (
 func Routeur(db DB.DBController, store *sessions.CookieStore) {
 	http.HandleFunc("/login", Client.Login)
 	http.HandleFunc("/register", Client.Register)
-	http.HandleFunc("/post", Client.Post)
+	Client.InitPostClient(db, store)
 	Client.CreatePost(db, store)
 	Client.LoginPost(db, store)
 	Client.HomeClient(db, store)
 	Client.RegisterPost(db)
-	Client.PostClient(db, store)
 	Client.Search(db, store)
-	//Client.HandleCreatepost(db, store)
 }

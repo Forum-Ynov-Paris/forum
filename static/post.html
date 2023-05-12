@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./static/css/home.css">
-    <title>{{.Title}}</title>
+    <title>{{.Post.Title}}</title>
 </head>
 <br>
 <header>
@@ -18,8 +18,31 @@
     </div>
 </header>
 <br>
-<body>
-    <h1>{{.Title}}</h1>
+<main>
+    <h1>{{.Post.Title}}</h1>
+    <h2>{{.Post.Content}}</h2>
 
-</body>
+    <form action="/post/" method="POST" id="form">
+        <div class="connexion">
+            <div class="login-form">
+
+                <div class="textb">
+                    <input type="text" id="newComment" name="newComment" required>
+                    <button class="NewComment" onclick="formSubmit()">New Comment</button>
+                </div>
+
+                {{ if .Post.Commentaire }}
+                {{ range .Post.Commentaire }}
+                <div class="comment">
+                    <section class="comment">
+                        <p>{{ .Content }}</p>
+                        <p>Posté par <span class="username">{{.Username}}</span></p>
+                    </section>
+                </div>
+                {{ end }}
+                {{ end }}
+            </div>
+        </div>
+    </form>
+</main>
 </html>

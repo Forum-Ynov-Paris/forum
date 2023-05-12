@@ -140,3 +140,7 @@ func AddPost(titre string, tag string, content string, date string, uuid int) {
 		return
 	}
 }
+
+func AddComment(id int, content string, uuid int) {
+	articles[id].Commentaire = append(articles[id].Commentaire, Commentaire{content, uuid})
+}
