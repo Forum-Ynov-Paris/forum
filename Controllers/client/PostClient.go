@@ -3,6 +3,7 @@ package Forum
 import (
 	API "Forum/Controllers/API"
 	DB "Forum/Controllers/DB"
+	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
 	"html/template"
 	"log"
@@ -16,26 +17,30 @@ type data struct {
 
 var (
 	Data    data
-	id      int
+	ID      int
 	uid     int
 	content string
 )
 
 func InitPostClient(db DB.DBController, store *sessions.CookieStore) {
 	http.HandleFunc("/post", func(w http.ResponseWriter, r *http.Request) {
+		// Récupérer la valeur du paramètre dans l'URL
+		vars := mux.Vars(r)
+		Title := vars["Title"]
+
 		session, _ := store.Get(r, "forum")
 
 		Data = data{
-			API.GetArticle(id), //changer + tard
+			API.GetArticle(ID), //changer + tard
 			"Guest",
 		}
-		id = 0
+		ID = API.GetIndexByTitle(Title)
 		row, err := db.QUERY("SELECT id FROM user WHERE pseudo = ?", session.Values["username"].(string))
 		if err != nil {
 			log.Fatal(err)
 		} else {
 			for row.Next() {
-				err = row.Scan(&id)
+				err = row.Scan(&ID)
 				if err != nil {
 					log.Fatal(err)
 				}
@@ -55,7 +60,7 @@ func InitPostClient(db DB.DBController, store *sessions.CookieStore) {
 		}
 
 		if r.Method == "POST" {
-			API.AddComment(id, content, uid)
+			API.AddComment(ID, content, uid)
 		}
 
 	})

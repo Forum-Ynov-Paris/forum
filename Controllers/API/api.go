@@ -42,6 +42,16 @@ func GetArticle(id int) Article {
 	return articles[id]
 }
 
+func GetIndexByTitle(title string) int {
+	Get()
+	for i, article := range articles {
+		if article.Title == title {
+			return i
+		}
+	}
+	return -1
+}
+
 func Get() {
 	//open ./data.json and unmarshall it
 	file, err := os.Open(Path)
