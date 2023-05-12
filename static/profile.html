@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./static/css/profile.css">
+    <title>Profil Utilisateur</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a onclick="location.href='./'">Forum</a>
+        </div>
+        <div class="logo">
+            <a onclick="location.href='./logout'">Logout</a>
+        </div>
+        <form action="/search" method="POST">
+            <div class="search-bar">
+                <input type="text" id="search" name="search" placeholder="Rechercher...">
+                <button type="submit">Rechercher</button>
+            </div>
+        </form>
+        <div class="user-profile">
+            <a onclick="location.href='./login'">
+                <img src="./static/img/userlogo.png" alt="Avatar">
+                Nom de l'utilisateur
+            </a>
+        </div>
+    </header>
+
+    <div class="connexion">
+        <div class="login-form">
+            <h1>Profil Utilisateur</h1>
+            <div class="info">
+                <div class="field">
+                    <label>Nom:</label>
+                    <p>John Doe</p>
+                </div>
+                <div class="field">
+                    <label>Email:</label>
+                    <p>johndoe@example.com</p>
+                </div>
+                <div class="field">
+                    <label>Location:</label>
+                    <p>New York</p>
+                </div>
+                <div class="field">
+                    <label>Interests:</label>
+                    <p>Coding, hiking, photography</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../static/js/showPassword.js"></script>
+    <script src="../static/js/login&register.js"></script>
+    <script src="../static/js/popup.js"></script>
+</body>
+
+</html>
