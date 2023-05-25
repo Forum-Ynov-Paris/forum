@@ -10,13 +10,13 @@ import (
 	"net/http"
 )
 
-type dataa struct {
+type data struct {
 	Post API.Article
 	Name string
 }
 
 var (
-	Data    dataa
+	Data    data
 	ID      int
 	uid     int
 	content string
@@ -30,7 +30,7 @@ func InitPostClient(db DB.DBController, store *sessions.CookieStore) {
 
 		session, _ := store.Get(r, "forum")
 
-		Data = dataa{
+		Data = data{
 			API.GetArticle(ID), //changer + tard
 			"Guest",
 		}
