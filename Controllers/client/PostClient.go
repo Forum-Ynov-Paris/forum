@@ -4,7 +4,6 @@ import (
 	API "Forum/Controllers/API"
 	DB "Forum/Controllers/DB"
 	"fmt"
-	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
 	"html/template"
 	"log"
@@ -24,14 +23,16 @@ func InitPostClient(db DB.DBController, store *sessions.CookieStore) {
 	}
 	http.HandleFunc("/post/", func(w http.ResponseWriter, r *http.Request) {
 		// Récupérer la valeur du paramètre dans l'URL
-		vars := mux.Vars(r)
-		Title := vars["Title"]
+		//vars := mux.Vars(r)
+		//Title := vars["Title"]
 
-		//Title := "r.URL.String()[:6]"
+		Title := r.URL.String()[6:]
 
 		fmt.Println(Title)
 
-		ID = API.GetIndexByTitle(Title)
+		if ID == -1 {
+			http.Redirect(w, r, "/", http.StatusNotFound)
+		}
 
 		session, _ := store.Get(r, "forum")
 
@@ -46,21 +47,23 @@ func InitPostClient(db DB.DBController, store *sessions.CookieStore) {
 				}
 			}
 		}
+
+		Data := data{
+			API.GetIndexByTitle(Title), //changer + tard
+			"Guest",
+		}
+
+		fmt.Println(Data.Post.Title)
+
 		content = r.FormValue("newComment")
-		t, err := template.ParseFiles("/static/post.html")
+		t, err := template.ParseFiles("./static/post.html")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
-		}
-
-		Data := data{
-			API.GetArticle(ID), //changer + tard
-			"Guest",
 		}
 		err = t.Execute(w, Data)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
 		}
 
 		if r.Method == "POST" {
