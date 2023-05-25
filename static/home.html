@@ -18,10 +18,17 @@
             </div>
         </form>
         <div class="user-profile">
-            <a onclick="location.href='./login'">
-                <img src="./static/img/userlogo.png" alt="Avatar">
-                {{.Name}}
-            </a>
+            {{ if .Connected }}
+                <a onclick="location.href='/profile'">
+                    <img src="./static/img/userlogo.png" alt="Avatar">
+                    {{.Name}}
+                </a>
+            {{ else }}
+                <a onclick="location.href='/login'">
+                    <img src="./static/img/userlogo.png" alt="Avatar">
+                    Connexion
+                </a>
+            {{ end }}
         </div>
     </header>
     <div class="container">

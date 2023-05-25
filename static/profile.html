@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./static/css/profile.css">
+    <link rel="stylesheet" href="/static/css/profile.css">
     <title>Profil Utilisateur</title>
 </head>
 
@@ -35,11 +35,11 @@
             <div class="info">
                 <div class="field">
                     <label>Nom:</label>
-                    <p>John Doe</p>
+                    <p>{{ .Name}}</p>
                 </div>
                 <div class="field">
                     <label>Email:</label>
-                    <p>johndoe@example.com</p>
+                    <p>{{ .Email}}</p>
                 </div>
                 <div class="field">
                     <label>Location:</label>

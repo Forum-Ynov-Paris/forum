@@ -14,6 +14,7 @@ func Routeur(db DB.DBController, store *sessions.CookieStore) {
 	Client.CreatePost(db, store)
 	Client.LoginPost(db, store)
 	Client.HomeClient(db, store)
+	Client.ProfileClient(db, store)
 	Client.RegisterPost(db)
 	Client.Search(db, store)
 }
