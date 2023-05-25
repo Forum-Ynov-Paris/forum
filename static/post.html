@@ -22,7 +22,7 @@
     <h1>{{.Post.Title}}</h1>
     <h2>{{.Post.Content}}</h2>
 
-    <form action="'/post/' + {{.Title}}" method="POST" id="form">
+    <form action="/post/{{.Post.Title}}" method="POST" id="form">
         <div class="connexion">
             <div class="login-form">
 

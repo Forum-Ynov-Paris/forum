@@ -28,7 +28,7 @@ type Article struct {
 }
 
 var (
-	Path     = "./data.json"
+	Path     = "./static/data.json"
 	articles []Article
 )
 
@@ -39,17 +39,19 @@ func GetArticles() []Article {
 
 func GetArticle(id int) Article {
 	Get()
+
 	return articles[id]
 }
 
-func GetIndexByTitle(title string) int {
+func GetIndexByTitle(title string) Article {
 	Get()
-	for i, article := range articles {
+	for _, article := range articles {
+		print(article.Title + "/" + title + "|\n")
 		if article.Title == title {
-			return i
+			return article
 		}
 	}
-	return -1
+	return Article{}
 }
 
 func Get() {
@@ -67,6 +69,26 @@ func Get() {
 
 	//unmarshall the json file
 	err = json.NewDecoder(file).Decode(&articles)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func Post() {
+	//marshall the json file
+	file, err := os.OpenFile(Path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}(file)
+
+	//marshall the json file
+	err = json.NewEncoder(file).Encode(&articles)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -153,4 +175,5 @@ func AddPost(titre string, tag string, content string, date string, uuid int) {
 
 func AddComment(id int, content string, uuid int) {
 	articles[id].Commentaire = append(articles[id].Commentaire, Commentaire{content, uuid})
+	Post()
 }
