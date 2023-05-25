@@ -128,7 +128,6 @@ body {
 .button_login a i {
     position: relative;
     top: 3px;
-
 }
 
 .button_login a:hover {
@@ -136,12 +135,6 @@ body {
     background: #4cd137;
     box-shadow: 0 0 10px #4cd137, 0 0 30px #4cd137, 0 0 60px #4cd137;
     transition-delay: 1s;
-
-}
-
-.button_login a span {
-    position: absolute;
-    display: block;
 }
 
 .button_login a span:nth-child(1) {
@@ -271,9 +264,57 @@ button[type="submit"]:hover {
     margin-right: 0.5em;
 }
 
-
 .user-profile a:hover {
     text-decoration: none;
-    background-color: #fff; /* Blanc */
+    background-color: #fff;
     color: #6c22ff; /* Violet */
 }
+
+.square {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.square h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.square .post-link {
+    font-size: 16px;
+    color: #6c22ff; /* Violet */
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+.square .tag {
+    font-size: 14px;
+    color: #9d9d9d;
+    margin-bottom: 5px;
+}
+
+.square .content {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.square .send-button {
+    background-color: #6c22ff; /* Violet */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.square .send-button:hover {
+    background-color: #4cd137;
+}
+
+
+

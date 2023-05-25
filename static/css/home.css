@@ -112,7 +112,10 @@ nav ul {
 }
 
 nav li {
-    margin-right: 1em;
+    margin-right: 5em;
+}
+nav lu {
+    margin-right: 15em;
 }
 
 nav a {

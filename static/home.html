@@ -3,13 +3,13 @@
 <head>
     <title>Forum - Accueil</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="./static/css/home.css">
+    <link rel="stylesheet" href="/static/css/home.css">
 </head>
 <body>
     <br>
     <header>
         <div class="logo">
-            <a onclick="location.href='./'">Forum</a>
+            <a onclick="location.href='/'">Forum</a>
         </div>
         <form action="/search" method="POST">
             <div class="search-bar">
@@ -18,17 +18,17 @@
             </div>
         </form>
         <div class="user-profile">
-            {{ if .Connected }}
-                <a onclick="location.href='/profile'">
-                    <img src="./static/img/userlogo.png" alt="Avatar">
-                    {{.Name}}
-                </a>
-            {{ else }}
+                {{ if .Connected }}
+                    <a onclick="location.href='/profile'">
+                        <img src="/static/img/userlogo.png" alt="Avatar">
+                        {{.Name}}
+                    </a>
+                {{ else }}
                 <a onclick="location.href='/login'">
-                    <img src="./static/img/userlogo.png" alt="Avatar">
+                    <img src="/static/img/userlogo.png" alt="Avatar">
                     Connexion
                 </a>
-            {{ end }}
+                {{ end }}
         </div>
     </header>
     <div class="container">
@@ -37,35 +37,51 @@
             <br>
             <nav>
                 {{ if .Connected }}
-                    <ul>
-                        <li><a onclick="location.href='./newpost'">Créer un post</a></li>
-                    </ul>
+                <ul>
+                    <li><a onclick="location.href='/newpost'">Créer un post</a></li>
+                </ul>
                 {{ else }}
-                    <ul>
-                        <li><a onclick="location.href='./login'">Créer un post</a></li>
-                    </ul>
+                <ul>
+                    <li><a onclick="location.href='/login'">Créer un post</a></li>
+                </ul>
                 {{ end }}
+            </nav>
+            <br>
+            <nav>
+                <br>
+                <ul>
+                    <lu></lu>
+                    <li><a onclick="location.href='/'">Hot</a></li>
+                    <li></li>
+                    <li><a onclick="location.href='/'">Best</a></li>
+                    <li></li>
+                    <li><a onclick="location.href='/'">Top</a></li>
+                    <li></li>
+                    <li><a onclick="location.href='/'">New</a></li>
+                    <li></li>
+                </ul>
+                <br>
             </nav>
             <br>
             <main>
                 {{ if .Posts }}
-                    {{ range .Posts }}
-                        <div class="home">
-                            <section class="post">
-                                <h2>{{ .Title }}</h2>
-                                <p>{{ .Content }}</p>
-                                <p>{{ .Date}}</p>
-                                <p>Posté par <span class="username">{{.Username}}</span></p>
-                                <div class="like-dislike">
-                                    <button class="like">J'aime</button>
-                                    <button class="dislike">Je n'aime pas</button>
-                                </div>
-                                <a onclick="location.href='/post/{{ .Title }}'">Lire la suite</a>
-                            </section>
+                {{ range .Posts }}
+                <div class="home">
+                    <section class="post">
+                        <h2>{{ .Title }}</h2>
+                        <p>{{ .Content }}</p>
+                        <p>{{ .Date}}</p>
+                        <p>Posté par <span class="username">{{.Username}}</span></p>
+                        <div class="like-dislike">
+                            <button class="like">J'aime</button>
+                            <button class="dislike">Je n'aime pas</button>
                         </div>
-                    {{ end }}
+                        <a onclick="location.href='/post/{{ .Title }}'">Lire la suite</a>
+                    </section>
+                </div>
+                {{ end }}
                 {{ else }}
-                    <p>Aucun post disponible pour le moment.</p>
+                <p>Aucun post disponible pour le moment.</p>
                 {{ end }}
             </main>
         </div>
