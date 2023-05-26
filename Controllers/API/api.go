@@ -28,7 +28,7 @@ type Article struct {
 }
 
 var (
-	Path     = "./static/data.json"
+	Path     = "data.json"
 	articles []Article
 )
 

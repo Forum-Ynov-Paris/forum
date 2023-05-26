@@ -26,6 +26,7 @@ func HomeClient(db DB.DBController, store *sessions.CookieStore) {
 		data := struct {
 			Name      string
 			Connected bool
+			Vots      int
 			Posts     []post
 		}{}
 		if session.Values["authenticated"] == true {

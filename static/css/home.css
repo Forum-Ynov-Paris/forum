@@ -51,6 +51,19 @@ input[type="text"] {
     font-size: 1em;
 }
 
+._23h0-EcaBUorIHC-JZyh6J {
+    -ms-flex-align: center;
+    align-items: center;
+    box-sizing: border-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    left: 0;
+    padding: 0px 20px 140px 0px;
+    top: 0;
+}
+
 button[type="submit"] {
     padding: 0.5em 1em;
     border: none;
@@ -189,7 +202,7 @@ nav t:hover {
 }
 
 .container::-webkit-scrollbar-thumb {
-    background-color: #888;
+    background-color: #ffffff;
 }
 
 .container::-webkit-scrollbar-thumb:hover {
@@ -252,3 +265,81 @@ nav t:hover {
     text-decoration: underline;
     color: #fff;
 }
+
+._3AStxql1mQsrZuUIFP9xSg {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    -ms-flex-align: center;
+    align-items: center;
+    color: inherit;
+}
+
+._3AStxql1mQsrZuUIFP9xSE {
+    text-align: start;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.icon-text {
+    display: flex;  /* Pour aligner l'icône et le texte horizontalement */
+    align-items: center;  /* Pour aligner l'icône et le texte verticalement */
+}
+.icon-text img {
+    margin-right: 10px;  /* Pour ajouter un espace entre l'icône et le texte */
+}
+
+._2mHuuvyV9doV3zwbZPtIPG {
+    display: inline-block;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+}
+
+._3LS4zudUBagjFS7HjWJYxo {
+    margin: 0 4px;
+}
+
+._3V4xlrklKBP2Hg51ejjjvz {
+    vertical-align: middle;
+}
+
+._37gsGHa8DMRAxBmQS-Ppg8 {
+    font-size: 6px;
+    line-height: 20px;
+}
+
+._3ryJoIoycVkA88fy40qNJc {
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 16px;
+    display: inline;
+    line-height: 20px;
+    text-decoration: none;
+    vertical-align: baseline;
+}
+
+/* Styles pour le formulaire de création de post */
+.arrow {
+    border: solid white;
+    margin: auto;
+    border-width: 0 10px 10px 0;
+    display: inline-block;
+    padding: 10px;
+    transition: 0.5s;
+}
+.down {
+    transform: rotate(-180deg);
+    -webkit-transform: rotate(-675deg);
+}
+.up {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(-135deg);
+}
+.arrow.up:hover {
+    border-color: #6c22ff;
+}
+.arrow.down:hover {
+    border-color: #6c22ff;
+}
+

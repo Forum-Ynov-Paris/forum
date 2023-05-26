@@ -6,83 +6,94 @@
     <link rel="stylesheet" href="/static/css/home.css">
 </head>
 <body>
-    <br>
-    <header>
-        <div class="logo">
-            <a onclick="location.href='/'">Forum</a>
-        </div>
-        <form action="/search" method="POST">
-            <div class="search-bar">
-                <input type="text" id="search" name="search" placeholder="Rechercher...">
-                <button type="submit">Rechercher</button>
-            </div>
-        </form>
-        <div class="user-profile">
-                {{ if .Connected }}
-                    <a onclick="location.href='/profile'">
-                        <img src="/static/img/userlogo.png" alt="Avatar">
-                        {{.Name}}
-                    </a>
-                {{ else }}
-                <a onclick="location.href='/login'">
-                    <img src="/static/img/userlogo.png" alt="Avatar">
-                    Connexion
-                </a>
-                {{ end }}
-        </div>
-    </header>
-    <div class="container">
-        <div class="content">
-            <br>
-            <br>
-            <nav>
-                {{ if .Connected }}
-                <ul>
-                    <li><a onclick="location.href='/newpost'">Créer un post</a></li>
-                </ul>
-                {{ else }}
-                <ul>
-                    <li><a onclick="location.href='/login'">Créer un post</a></li>
-                </ul>
-                {{ end }}
-            </nav>
-            <br>
-            <nav>
-                <br>
-                <ul>
-                    <t onclick="location.href='/'">Hot
-                        <img src="/static/img/flame.png" width=30% height=30% alt="Avatar"></t>
-                    <t onclick="location.href='/'">Best
-                        <img src="/static/img/Best.png" width=30% height=30% alt="Avatar"></t><
-                    <t onclick="location.href='/'">Top
-                        <img src="/static/img/top.png" width=30% height=30% alt="Avatar"></t>
-                    <t onclick="location.href='/'">New
-                        <img src="/static/img/new.png" width=30% height=30% alt="Avatar"></t>
-                </ul>
-            </nav>
-            <br>
-            <main>
-                {{ if .Posts }}
-                {{ range .Posts }}
-                <div class="home">
-                    <section class="post">
-                        <h2>{{ .Title }}</h2>
-                        <p>{{ .Content }}</p>
-                        <p>{{ .Date}}</p>
-                        <p>Posté par <span class="username">{{.Username}}</span></p>
-                        <div class="like-dislike">
-                            <button class="like">J'aime</button>
-                            <button class="dislike">Je n'aime pas</button>
-                        </div>
-                        <a onclick="location.href='/post/{{ .Title }}'">Lire la suite</a>
-                    </section>
-                </div>
-                {{ end }}
-                {{ else }}
-                <p>Aucun post disponible pour le moment.</p>
-                {{ end }}
-            </main>
-        </div>
+<br>
+<header>
+    <div class="logo">
+        <a onclick="location.href='/'">Forum</a>
     </div>
+    <form action="/search" method="POST">
+        <div class="search-bar">
+            <input type="text" id="search" name="search" placeholder="Rechercher...">
+            <button type="submit">Rechercher</button>
+        </div>
+    </form>
+    <div class="user-profile">
+        {{ if .Connected }}
+        <div class="icon-text">
+            <img src="static/img/userlogo.png" width=70% height=70% alt="Avatar"><a onclick="location.href='/profile'">{{ .Name}}</a>
+        </div>
+        {{ else }}
+        <div class="icon-text">
+            <img src="static/img/userlogo.png" width=70% height=70% alt="Avatar"><a onclick="location.href='/login'">{{ .Name}}</a>
+        </div>
+        {{ end }}
+    </div>
+</header>
+<div class="container">
+    <div class="content">
+        <br>
+        <br>
+        <nav>
+            {{ if .Connected }}
+            <ul>
+                <li><a onclick="location.href='/newpost'">Créer un post</a></li>
+            </ul>
+            {{ else }}
+            <ul>
+                <li><a onclick="location.href='/login'">Créer un post</a></li>
+            </ul>
+            {{ end }}
+            <br>
+            <ul>
+                <div class="icon-text">
+                    <img src="static/img/hot.png" width=70% height=70% alt="Avatar"><a onclick="location.href='/'">Hot</a>
+                </div>
+                <div class="icon-text">
+                    <img src="static/img/best.png"  width=70% height=70% alt="Avatar"><a onclick="location.href='/'">Best</a>
+                </div>
+                <div class="icon-text">
+                    <img src="static/img/new.png"  width=70% height=70% alt="Avatar"><a onclick="location.href='/'">New</a>
+                </div>
+                <div class="icon-text">
+                    <img src="static/img/top.png"  width=70% height=70% alt="Avatar"><a onclick="location.href='/'">Top</a>
+                </div>
+            </ul>
+        </nav>
+        <br>
+        <main>
+            {{ if .Posts }}
+            {{ range .Posts }}
+            <div class="home">
+                <div class="_23h0-EcaBUorIHC-JZyh6J">
+                    <i class="arrow up"></i>
+                    <a>{{ .Upvote}}</a>
+                    <i class="arrow down"></i>
+                </div>
+                <section class="post">
+                    <div class="_3AStxql1mQsrZuUIFP9xSg">
+                        <div class="_2mHuuvyV9doV3zwbZPtIPG"><a class="_3ryJoIoycVkA88fy40qNJc"> {{ .Title }}</a></div>
+                        <span class="_3LS4zudUBagjFS7HjWJYxo _37gsGHa8DMRAxBmQS-Ppg8 _3V4xlrklKBP2Hg51ejjjvz" role="presentation">•</span>
+                        <div class="_2mHuuvyV9doV3zwbZPtIPG">publié par : {{ .Username}}</div>
+                        <span class="_3LS4zudUBagjFS7HjWJYxo _37gsGHa8DMRAxBmQS-Ppg8 _3V4xlrklKBP2Hg51ejjjvz" role="presentation">•</span>
+                        <div class="_2mHuuvyV9doV3zwbZPtIPG"> le {{ .Date }}</div>
+                    </div>
+                    <br>
+                    <div class="_2mHuuvyV9doV3zwbZPtIPG">{{ .Content }}</div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="icon-text">
+                        <img src="static/img/commentaire.png" width=2% height=2% alt="Avatar"><a onclick="location.href='/post/{{ .Title }}'">Commentaires</a>
+                    </div>
+                </section>
+            </div>
+            {{ end }}
+            {{ else }}
+            <p>Aucun post disponible pour le moment.</p>
+            {{ end }}
+        </main>
+    </div>
+</div>
 </body>
 </html>
