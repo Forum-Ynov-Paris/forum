@@ -17,14 +17,17 @@ var (
 )
 
 func InitPostClient(db DB.DBController, store *sessions.CookieStore) {
+	type commentary struct {
+		C        API.Commentaire
+		Username string
+	}
+
 	type data struct {
-		Post API.Article
-		Name string
+		Post        API.Article
+		Commentates []commentary
+		Name        string
 	}
 	http.HandleFunc("/post/", func(w http.ResponseWriter, r *http.Request) {
-		// Récupérer la valeur du paramètre dans l'URL
-		//vars := mux.Vars(r)
-		//Title := vars["Title"]
 
 		Title := r.URL.String()[6:]
 
@@ -50,10 +53,15 @@ func InitPostClient(db DB.DBController, store *sessions.CookieStore) {
 
 		Data := data{
 			API.GetIndexByTitle(Title), //changer + tard
-			"Guest",
+			make([]commentary, 0),
+			session.Values["username"].(string),
 		}
 
-		fmt.Println(Data.Post.Title)
+		for _, c := range Data.Post.Commentaire {
+			Data.Commentates = append(Data.Commentates, commentary{c, db.GetUsername(c.Uuid)})
+		}
+
+		fmt.Println(len(Data.Commentates))
 
 		content = r.FormValue("newComment")
 		t, err := template.ParseFiles("./static/post.html")
