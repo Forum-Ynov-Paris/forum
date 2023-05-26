@@ -3,7 +3,6 @@ package Forum
 import (
 	Forum "Forum/Controllers/API"
 	DB "Forum/Controllers/DB"
-	"fmt"
 	"github.com/gorilla/sessions"
 	"html/template"
 	"log"
@@ -43,9 +42,7 @@ func CreatePost(db DB.DBController, store *sessions.CookieStore) {
 		session, _ := store.Get(r, "forum")
 		username := session.Values["username"].(string)
 
-		fmt.Println("newpost")
 		if r.Method == "POST" {
-			fmt.Println("po")
 			title := r.FormValue("title")
 			content := r.FormValue("content")
 			tag := r.FormValue("tag")

@@ -17,6 +17,8 @@ import (
 
 type Commentaire struct {
 	Content string `json:"content"`
+	Date    string `json:"date"`
+	Upvote  int    `json:"upvote"`
 	Uuid    int    `json:"uuid"`
 }
 
@@ -180,9 +182,56 @@ func AddPost(titre string, tag string, content string, date string, uuid int) {
 	}
 }
 
-func AddComment(id int, content string, uuid int) {
-	articles[id].Commentaire = append(articles[id].Commentaire, Commentaire{content, uuid})
-	Post()
+func AddComment(key int, date string, content string, uuid int) {
+	//Content string `json:"content"`
+	//Date    string `json:"date"`
+	//Upvote  int    `json:"upvote"`
+	//Uuid    int    `json:"uuid"`
+
+	comment := Commentaire{
+		Content: content,
+		Date:    date,
+		Upvote:  0,
+		Uuid:    uuid,
+	}
+	var articless []Article
+
+	file, err := ioutil.ReadFile("data.json")
+	if err != nil {
+		fmt.Println("Erreur lors de la lecture du fichier:", err)
+		return
+	}
+
+	// Désérialiser le contenu JSON dans la variable
+	err = json.Unmarshal(file, &articless)
+	if err != nil {
+		fmt.Println("Erreur lors de la désérialisation JSON:", err)
+		return
+	}
+
+	var p int
+	for m, article := range articless {
+		if article.Key == key {
+			p = m
+		}
+	}
+
+	articless[p].Commentaire = append(articless[p].Commentaire, comment)
+
+	// Sérialiser les données en JSON
+	newData, err := json.MarshalIndent(articless, "", "  ")
+	if err != nil {
+		fmt.Println("Erreur lors de la sérialisation JSON:", err)
+		return
+	}
+
+	// Écrire les données JSON dans le fichier
+	err = ioutil.WriteFile("data.json", newData, os.ModePerm)
+	if err != nil {
+		fmt.Println("Erreur lors de l'écriture dans le fichier:", err)
+		return
+	}
+
 }
 
 func GetAPIWithKey(key string) Article {
@@ -194,4 +243,84 @@ func GetAPIWithKey(key string) Article {
 		}
 	}
 	return Article{}
+}
+
+func UpVote(key int) {
+	var articless []Article
+
+	file, err := ioutil.ReadFile("data.json")
+	if err != nil {
+		fmt.Println("Erreur lors de la lecture du fichier:", err)
+		return
+	}
+
+	// Désérialiser le contenu JSON dans la variable
+	err = json.Unmarshal(file, &articless)
+	if err != nil {
+		fmt.Println("Erreur lors de la désérialisation JSON:", err)
+		return
+	}
+
+	var p int
+	for m, article := range articless {
+		if article.Key == key {
+			p = m
+		}
+	}
+
+	articless[p].Upvote++
+
+	// Sérialiser les données en JSON
+	newData, err := json.MarshalIndent(articless, "", "  ")
+	if err != nil {
+		fmt.Println("Erreur lors de la sérialisation JSON:", err)
+		return
+	}
+
+	// Écrire les données JSON dans le fichier
+	err = ioutil.WriteFile("data.json", newData, os.ModePerm)
+	if err != nil {
+		fmt.Println("Erreur lors de l'écriture dans le fichier:", err)
+		return
+	}
+}
+
+func DownVote(key int) {
+	var articless []Article
+
+	file, err := ioutil.ReadFile("data.json")
+	if err != nil {
+		fmt.Println("Erreur lors de la lecture du fichier:", err)
+		return
+	}
+
+	// Désérialiser le contenu JSON dans la variable
+	err = json.Unmarshal(file, &articless)
+	if err != nil {
+		fmt.Println("Erreur lors de la désérialisation JSON:", err)
+		return
+	}
+
+	var p int
+	for m, article := range articless {
+		if article.Key == key {
+			p = m
+		}
+	}
+
+	articless[p].Upvote--
+
+	// Sérialiser les données en JSON
+	newData, err := json.MarshalIndent(articless, "", "  ")
+	if err != nil {
+		fmt.Println("Erreur lors de la sérialisation JSON:", err)
+		return
+	}
+
+	// Écrire les données JSON dans le fichier
+	err = ioutil.WriteFile("data.json", newData, os.ModePerm)
+	if err != nil {
+		fmt.Println("Erreur lors de l'écriture dans le fichier:", err)
+		return
+	}
 }

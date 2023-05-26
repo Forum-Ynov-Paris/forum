@@ -11,6 +11,7 @@ func Routeur(db DB.DBController, store *sessions.CookieStore) {
 	http.HandleFunc("/login", Client.Login)
 	http.HandleFunc("/register", Client.Register)
 	Client.InitPostClient(db, store)
+	Client.UpAndDownVote(db, store)
 	Client.CreatePost(db, store)
 	Client.LoginPost(db, store)
 	Client.HomeClient(db, store)

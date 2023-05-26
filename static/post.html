@@ -10,39 +10,84 @@
     <div class="logo">
         <a onclick="location.href='/'">Forum</a>
     </div>
+    <form action="/search" method="POST">
+        <div class="search-bar">
+            <input type="text" id="search" name="search" placeholder="Rechercher...">
+            <button type="submit">Rechercher</button>
+        </div>
+    </form>
     <div class="user-profile">
-        <a onclick="location.href='/login'">
-            <img src="/static/img/userlogo.png" alt="Avatar">
-            {{.Name}}
-        </a>
+        {{ if .Connected }}
+        <div class="icon-text">
+            <img src="/static/img/userlogo.png" width=70% height=70% alt="Avatar"><a onclick="location.href='/profile'">{{ .Name}}</a>
+        </div>
+        {{ else }}
+        <div class="icon-text">
+            <img src="/static/img/userlogo.png" width=70% height=70% alt="Avatar"><a onclick="location.href='/login'">{{ .Name}}</a>
+        </div>
+        {{ end }}
     </div>
 </header>
 <br>
-<main>
-    <h1>{{.Post.Title}}</h1>
-    <h2>{{.Post.Content}}</h2>
-
-    <form action="/post/{{.Post.Title}}" method="POST" id="form">
-        <div class="connexion">
-            <div class="login-form">
-
-                <div class="textb">
-                    <input type="text" id="newComment" name="newComment" required>
-                    <button class="NewComment" onclick="formSubmit()">New Comment</button>
+<div class="container">
+    <div class="content">
+        <main>
+            <div class="home">
+                <div class="_23h0-EcaBUorIHC-JZyh6J">
+                    <i class="arrow up" onclick="location.href='/up/{{ .Key }}'"></i>
+                    <a>{{ .Upvote}}</a>
+                    <i class="arrow down" onclick="location.href='/down/{{ .Key }}'"></i>
                 </div>
-
-                {{ if .Commentates }}
-                {{ range .Commentates }}
-                <div class="comment">
-                    <section class="comment">
-                        <p>{{ .C.Content }}</p>
-                        <p>Posté par <span class="username">{{.Username}}</span></p>
-                    </section>
-                </div>
-                {{ end }}
-                {{ end }}
+                <section class="post">
+                    <div class="_3AStxql1mQsrZuUIFP9xSg">
+                        <div class="_2mHuuvyV9doV3zwbZPtIPG"><a class="_3ryJoIoycVkA88fy40qNJc"> {{ .Post.Title }}</a></div>
+                        <span class="_3LS4zudUBagjFS7HjWJYxo _37gsGHa8DMRAxBmQS-Ppg8 _3V4xlrklKBP2Hg51ejjjvz" role="presentation">•</span>
+                        <div class="_2mHuuvyV9doV3zwbZPtIPG">publié par : {{ .Name}}</div>
+                        <span class="_3LS4zudUBagjFS7HjWJYxo _37gsGHa8DMRAxBmQS-Ppg8 _3V4xlrklKBP2Hg51ejjjvz" role="presentation">•</span>
+                        <div class="_2mHuuvyV9doV3zwbZPtIPG"> le {{ .Post.Date }}</div>
+                    </div>
+                    <br>
+                    <div class="_2mHuuvyV9doV3zwbZPtIPG">{{ .Post.Content }}</div>
+                </section>
             </div>
+
+            <nav>
+                <form action="/api/post/{{ .Post.Key }}" method="POST" id="form">
+                    <div class="search-bar">
+                        <div class="textb">
+                            <input type="text" id="newComment" name="newComment" required>
+                            <button type="submit">New Comment</button>
+                        </div>
+                    </div>
+                </form>
+
+            </nav>
+        </main>
+        <br>
+
+        {{ if .Commentates }}
+        {{ range .Commentates }}
+        <div class="home">
+            <div class="_23h0-EcaBUorIHC-JZyh6J">
+                <i class="arrow up"></i>
+                <a>{{ .C.Upvote}}</a>
+                <i class="arrow down"></i>
+            </div>
+            <section class="post">
+                <div class="_3AStxql1mQsrZuUIFP9xSg">
+                    <div class="_2mHuuvyV9doV3zwbZPtIPG">publié par :</div>
+                        <div class="_2mHuuvyV9doV3zwbZPtIPG"><h2>{{ .Username}}</h2></div>
+                    <span class="_3LS4zudUBagjFS7HjWJYxo _37gsGHa8DMRAxBmQS-Ppg8 _3V4xlrklKBP2Hg51ejjjvz" role="presentation">•</span>
+                    <div class="_2mHuuvyV9doV3zwbZPtIPG"> le {{ .C.Date }}</div>
+                </div>
+                <br>
+                <div class="_2mHuuvyV9doV3zwbZPtIPG">{{ .C.Content }}</div>
+            </section>
         </div>
-    </form>
-</main>
+        {{ end }}
+        {{ else }}
+        <p>Aucun post disponible pour le moment.</p>
+        {{ end }}
+    </div>
+</div>
 </html>
