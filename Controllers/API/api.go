@@ -8,8 +8,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"math/rand"
 	"os"
+	"strconv"
 	"strings"
+	"time"
 )
 
 type Commentaire struct {
@@ -20,6 +23,7 @@ type Commentaire struct {
 type Article struct {
 	Title       string        `json:"title"`
 	Tag         string        `json:"tag"`
+	Key         int           `json:"key"`
 	Content     string        `json:"content"`
 	Upvote      int           `json:"upvote"`
 	Date        string        `json:"date"`
@@ -147,12 +151,15 @@ func AddPost(titre string, tag string, content string, date string, uuid int) {
 		return
 	}
 
+	rand.Seed(time.Now().UnixNano())
+	key := rand.Int()
 	// Ajouter un nouvel élément au tableau JSON
 	newPerson := Article{
 		Title:   titre,
 		Tag:     tag,
 		Content: content,
 		Upvote:  0,
+		Key:     key,
 		Date:    date,
 		Uuid:    uuid,
 	}
@@ -176,4 +183,15 @@ func AddPost(titre string, tag string, content string, date string, uuid int) {
 func AddComment(id int, content string, uuid int) {
 	articles[id].Commentaire = append(articles[id].Commentaire, Commentaire{content, uuid})
 	Post()
+}
+
+func GetAPIWithKey(key string) Article {
+	Get()
+	tmp, _ := strconv.Atoi(key)
+	for _, article := range articles {
+		if article.Key == tmp {
+			return article
+		}
+	}
+	return Article{}
 }

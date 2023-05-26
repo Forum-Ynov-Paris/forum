@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/gorilla/sessions"
 	"html/template"
-	"log"
 	"net/http"
 )
 
@@ -33,26 +32,22 @@ func InitPostClient(db DB.DBController, store *sessions.CookieStore) {
 
 		fmt.Println(Title)
 
-		if ID == -1 {
-			http.Redirect(w, r, "/", http.StatusNotFound)
-		}
-
 		session, _ := store.Get(r, "forum")
 
-		row, err := db.QUERY("SELECT id FROM user WHERE pseudo = ?", session.Values["username"].(string))
-		if err != nil {
-			log.Fatal(err)
-		} else {
-			for row.Next() {
-				err = row.Scan(&ID)
-				if err != nil {
-					log.Fatal(err)
-				}
-			}
-		}
+		//row, err := db.QUERY("SELECT id FROM user WHERE pseudo = ?", session.Values["username"].(string))
+		//if err != nil {
+		//	log.Fatal(err)
+		//} else {
+		//	for row.Next() {
+		//		err = row.Scan(&ID)
+		//		if err != nil {
+		//			log.Fatal(err)
+		//		}
+		//	}
+		//}
 
 		Data := data{
-			API.GetIndexByTitle(Title), //changer + tard
+			API.GetAPIWithKey(Title), //changer + tard
 			make([]commentary, 0),
 			session.Values["username"].(string),
 		}
