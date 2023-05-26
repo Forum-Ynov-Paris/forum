@@ -31,11 +31,11 @@
                     <button class="NewComment" onclick="formSubmit()">New Comment</button>
                 </div>
 
-                {{ if .Post.Commentaire }}
-                {{ range .Post.Commentaire }}
+                {{ if .Commentates }}
+                {{ range .Commentates }}
                 <div class="comment">
                     <section class="comment">
-                        <p>{{ .Content }}</p>
+                        <p>{{ .C.Content }}</p>
                         <p>Posté par <span class="username">{{.Username}}</span></p>
                     </section>
                 </div>
