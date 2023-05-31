@@ -343,3 +343,66 @@ nav t:hover {
     border-color: #6c22ff;
 }
 
+
+.profile-container {
+    width: 60%;
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+}
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+.profile-name {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+.profile-description {
+    font-size: 18px;
+    margin-top: 20px;
+}
+.profile-contact {
+    font-size: 16px;
+    margin-top: 30px;
+}
+
+
+.pro {
+    min-height: 40vh;
+    display: flex;
+    align-items: start;
+    margin: 30px 200px 0px 210px;
+    background-color: #6c22ff; /* Violet */
+    padding: 1em;
+    border-radius: 1em 1em 1em 1em;
+    justify-content: start;
+}
+
+.pro h1 {
+    font-size: 3em;
+    margin: 20px 200px 0px 120px;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.pro h2 {
+    margin: 100px -500px 0px -600px;
+    align-items: start;
+    justify-content: start;
+    color: #fff;
+}
+
+.block {
+    display: block;
+}
+
+.pro h3 {
+    margin: 100px -500px 0px -600px;
+    align-items: start;
+    justify-content: start;
+    color: #fff;
+}

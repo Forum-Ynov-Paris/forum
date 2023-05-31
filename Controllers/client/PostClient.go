@@ -58,7 +58,6 @@ func InitPostClient(db DB.DBController, store *sessions.CookieStore) {
 			Data.Commentates = append(Data.Commentates, commentary{c, db.GetUsername(c.Uuid)})
 		}
 
-		content = r.FormValue("newComment")
 		t, err := template.ParseFiles("./static/post.html")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
