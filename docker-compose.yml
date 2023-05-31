@@ -1,0 +1,8 @@
+version: '3.9'
+
+services:
+    go-project:
+      container_name: projet-go 
+      image: forum-app:latest # Le nom de ton image
+      ports:
+        - 8080:8080
