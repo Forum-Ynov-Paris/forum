@@ -3,24 +3,16 @@ package Forum
 import (
 	"database/sql"
 	"errors"
+	"github.com/gorilla/sessions"
 	_ "github.com/mattn/go-sqlite3"
 	"golang.org/x/crypto/bcrypt"
 	"log"
+	"net/http"
 )
 
 type DBController struct {
 	IsInit   bool
 	Database *sql.DB
-}
-
-func (dbc *DBController) GetUsername(uid int) string {
-	row, _ := dbc.Database.Query("SELECT pseudo FROM user WHERE id = ?", uid)
-	for row.Next() {
-		var pseudo string
-		row.Scan(&pseudo)
-		return pseudo
-	}
-	return ""
 }
 
 func (dbc *DBController) INIT(databaseName string) error {
@@ -55,7 +47,6 @@ func (dbc *DBController) POST(query string, args ...interface{}) error {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer stmt.Close()
 
 	_, err = stmt.Exec(args...)
 	if err != nil {
@@ -81,4 +72,34 @@ func ComparePasswords(hashedPassword string, password string) error {
 		return err
 	}
 	return nil
+}
+
+func Profil(db DBController, store *sessions.CookieStore, r *http.Request, w http.ResponseWriter) string {
+	session, err := store.Get(r, "forum")
+	rows, _ := db.QUERY("SELECT profil FROM user WHERE pseudo = ?", session.Values["username"].(string))
+	var img string
+	for rows.Next() {
+		err = rows.Scan(&img)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return "err"
+		}
+	}
+	defer rows.Close()
+	if img != "" {
+		return img
+	} else {
+		return ""
+	}
+}
+
+func GetUsername(db DBController, uid int) string {
+	row, _ := db.QUERY("SELECT pseudo FROM user WHERE id = ?", uid)
+	var pseudo string
+	for row.Next() {
+		row.Scan(&pseudo)
+
+	}
+	defer row.Close()
+	return pseudo
 }

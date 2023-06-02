@@ -31,17 +31,32 @@ func Search(db DB.DBController, store *sessions.CookieStore) {
 			Posts := make([]postSearch, len(articles))
 			for i, article := range articles {
 				Posts[i].Article = article
-				Posts[i].Username = db.GetUsername(article.Uuid)
+				Posts[i].Username = DB.GetUsername(db, article.Uuid)
 			}
 
 			session, err := store.Get(r, "forum")
 			data := struct {
-				Name  string
+				Name string
+				//Img   string
 				Posts []postSearch
 			}{}
 			if session.Values["authenticated"] == true {
 				data.Name = session.Values["username"].(string)
 				data.Posts = Posts
+				//row, _ := db.QUERY("SELECT profil FROM user WHERE pseudo = ?", session.Values["username"].(string))
+				//for row.Next() {
+				//	var img string
+				//	err = row.Scan(&img)
+				//	if err != nil {
+				//		http.Error(w, err.Error(), http.StatusInternalServerError)
+				//		return
+				//	}
+				//	if img != "" {
+				//		data.Img = img
+				//	} else {
+				//		data.Img = ""
+				//	}
+				//}
 			} else {
 				data.Name = "Guest"
 				data.Posts = Posts

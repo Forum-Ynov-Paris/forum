@@ -20,7 +20,11 @@
     <div class="user-profile">
         {{ if .Connected }}
         <div class="icon-text">
+            {{ if .Img }}
+            <img src="{{ .Img }}" width=70% height=70% alt="Avatar"><a onclick="location.href='/profile'">{{ .Name}}</a>
+            {{else}}
             <img src="static/img/userlogo.png" width=70% height=70% alt="Avatar"><a onclick="location.href='/profile'">{{ .Name}}</a>
+            {{end}}
         </div>
         {{ else }}
         <div class="icon-text">

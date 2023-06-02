@@ -101,12 +101,21 @@ button[type="submit"]:hover {
     margin-right: 0.5em;
 }
 
-
-.user-profile icon {
-    width: 20px;
-    height: 20px;
+.round-image-container {
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    margin-right: 0.5em;
+    overflow: hidden;
+    margin: 50px -50px 0px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.round-image-container img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
 .user-profile a:hover {
@@ -290,6 +299,7 @@ nav t:hover {
     margin-right: 10px;  /* Pour ajouter un espace entre l'icône et le texte */
 }
 
+
 ._2mHuuvyV9doV3zwbZPtIPG {
     display: inline-block;
     -ms-flex: 0 0 auto;
@@ -383,16 +393,25 @@ nav t:hover {
 
 .pro h1 {
     font-size: 3em;
-    margin: 20px 200px 0px 120px;
+    margin: 20px 100px 0px 100px;
     align-items: center;
     justify-content: center;
     color: #fff;
 }
 
 .pro h2 {
-    margin: 100px -500px 0px -600px;
+    font-size: 2em;
+    margin: 110px -100px 0px -400px;
     align-items: start;
     justify-content: start;
+    color: #fff;
+}
+
+.pro h4 {
+    font-size: 2em;
+    margin: 110px -900px 40px 120px;
+    align-items: center;
+    justify-content: center;
     color: #fff;
 }
 

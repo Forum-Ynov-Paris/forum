@@ -19,9 +19,24 @@ func CreatePost(db DB.DBController, store *sessions.CookieStore) {
 		session, err := store.Get(r, "forum")
 		data := struct {
 			Name string
+			//Img  string
 		}{}
 		if session.Values["authenticated"] == true {
 			data.Name = session.Values["username"].(string)
+			//row, _ := db.QUERY("SELECT profil FROM user WHERE pseudo = ?", session.Values["username"].(string))
+			//for row.Next() {
+			//	var img string
+			//	err = row.Scan(&img)
+			//	if err != nil {
+			//		http.Error(w, err.Error(), http.StatusInternalServerError)
+			//		return
+			//	}
+			//	if img != "" {
+			//		data.Img = img
+			//	} else {
+			//		data.Img = ""
+			//	}
+			//}
 		} else {
 			data.Name = "Guest"
 		}

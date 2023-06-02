@@ -2,7 +2,6 @@ package Forum
 
 import (
 	DB "Forum/Controllers/DB"
-	"fmt"
 	"html/template"
 	"net/http"
 )
@@ -24,9 +23,8 @@ func RegisterPost(db DB.DBController) {
 			pseudo := r.FormValue("pseudo")
 			password := r.FormValue("password")
 			hash, _ := DB.HashPassword(password)
-			fmt.Println(firstName, lastName, email, pseudo, password, hash)
-			db.POST("INSERT INTO user(firstname, lastname, email, pseudo, password) VALUES (?, ?, ?, ?, ?)", firstName, lastName, email, pseudo, hash)
+			db.POST("INSERT INTO user(firstname, lastname, email, pseudo, password, profil) VALUES (?, ?, ?, ?, ?, ?)", firstName, lastName, email, pseudo, hash, "")
 		}
-		http.Redirect(w, r, "/", http.StatusSeeOther)
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
 	})
 }

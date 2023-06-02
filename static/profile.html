@@ -11,6 +11,17 @@
     <div class="logo">
         <a onclick="location.href='/'">Forum</a>
     </div>
+    <nav>
+        <ul>
+            <li><a onclick="location.href='/logout'">Déconnexion</a></li>
+        </ul>
+    </nav>
+    <nav>
+        <form action="/profile/edit" method="POST">
+            <input type="text" id="profileimg" name="profileimg" placeholder="Changé votre photo de profile...">
+                <button type="submit">Changer</button>
+        </form>
+    </nav>
     <form action="/search" method="POST">
         <div class="search-bar">
             <input type="text" id="search" name="search" placeholder="Rechercher...">
@@ -19,23 +30,70 @@
     </form>
     <div class="user-profile">
         <div class="icon-text">
+            {{ if .Img }}
+            <img src="{{ .Img }}" width=70% height=70% alt="Avatar"><a onclick="location.href='/profile'">{{ .Name}}</a>
+            {{else}}
             <img src="static/img/userlogo.png" width=70% height=70% alt="Avatar"><a onclick="location.href='/profile'">{{ .Name}}</a>
+            {{end}}
         </div>
     </div>
 </header>
 <br>
-<!--<img src="/static/img/userlogo.png" width=35% height=35% alt="Profile Picture" class="profile-image">-->
-<div class="pro">
-    <img src="/static/img/userlogo.png" width=20% height=20% alt="Profile Picture" >
-    <h1>
-        <h1>{{ .Name}}</h1>
-    </h1>
-    <span class="block">
-        Email : {{ .Email}}
-        Email : {{ .Email}}Email : {{ .Email}}
-        Email : {{ .Email}}
-        Email : {{ .Email}}
-    </span>
+<div class="container">
+    <div class="content">
+        <div class="pro">
+            <div class="round-image-container">
+            {{ if .Img }}
+            <img src="{{ .Img }}" width=70% height=70% alt="Avatar"><a onclick="location.href='/profile'"></a>
+            {{else}}
+            <img src="static/img/userlogo.png" width=70% height=70% alt="Avatar"><a onclick="location.href='/profile'"></a>
+            {{end}}
+            </div>
+            <h1>
+                <h1>{{ .Name}}</h1>
+            </h1>
+            <h2>
+                <p>Prénom : {{ .Fname}}</p>
+                <p>Nom : {{ .Lname}}</p>
+                <p>Email : {{ .Email}}</p>
+            </h2>
+        </div>
+        <!--<img src="/static/img/userlogo.png" width=35% height=35% alt="Profile Picture" class="profile-image">-->
+        <br>
+        <main>
+            {{ if .Posts }}
+            {{ range .Posts }}
+            <div class="home">
+                <div class="_23h0-EcaBUorIHC-JZyh6J">
+                    <i class="arrow up" onclick="location.href='/up/{{ .Key }}'"></i>
+                    <a>{{ .Upvote}}</a>
+                    <i class="arrow down" onclick="location.href='/down/{{ .Key }}'"></i>
+                </div>
+                <section class="post">
+                    <div class="_3AStxql1mQsrZuUIFP9xSg">
+                        <div class="_2mHuuvyV9doV3zwbZPtIPG"><a class="_3ryJoIoycVkA88fy40qNJc"> {{ .Title }}</a></div>
+                        <span class="_3LS4zudUBagjFS7HjWJYxo _37gsGHa8DMRAxBmQS-Ppg8 _3V4xlrklKBP2Hg51ejjjvz" role="presentation">•</span>
+                        <div class="_2mHuuvyV9doV3zwbZPtIPG">publié par : {{ .Username}}</div>
+                        <span class="_3LS4zudUBagjFS7HjWJYxo _37gsGHa8DMRAxBmQS-Ppg8 _3V4xlrklKBP2Hg51ejjjvz" role="presentation">•</span>
+                        <div class="_2mHuuvyV9doV3zwbZPtIPG"> le {{ .Date }}</div>
+                    </div>
+                    <br>
+                    <div class="_2mHuuvyV9doV3zwbZPtIPG"><span class="block">{{ .Content }}</span></div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="icon-text">
+                        <img src="static/img/commentaire.png" width=2% height=2% alt="Avatar"><a onclick="location.href='/post/{{ .Key }}'">Commentaires</a>
+                    </div>
+                </section>
+            </div>
+            {{ end }}
+            {{ else }}
+            <p>Aucun post disponible pour le moment.</p>
+            {{ end }}
+        </main>
+    </div>
 </div>
 </body>
 </html>

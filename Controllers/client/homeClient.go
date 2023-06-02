@@ -19,7 +19,7 @@ func HomeClient(db DB.DBController, store *sessions.CookieStore) {
 		Posts := make([]post, len(articles))
 		for i, article := range articles {
 			Posts[i].Article = article
-			Posts[i].Username = db.GetUsername(article.Uuid)
+			Posts[i].Username = DB.GetUsername(db, article.Uuid)
 		}
 
 		session, err := store.Get(r, "forum")
@@ -27,11 +27,13 @@ func HomeClient(db DB.DBController, store *sessions.CookieStore) {
 			Name      string
 			Connected bool
 			Vots      int
+			Img       string
 			Posts     []post
 		}{}
 		if session.Values["authenticated"] == true {
 			data.Name = session.Values["username"].(string)
 			data.Connected = true
+			//data.Img = DB.Profil(db, store, r, w)
 			data.Posts = Posts
 		} else {
 			data.Name = "Guest"

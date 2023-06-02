@@ -5,6 +5,7 @@ import (
 	DB "Forum/Controllers/DB"
 	"fmt"
 	"github.com/gorilla/sessions"
+	"log"
 	"net/http"
 )
 
@@ -20,5 +21,10 @@ func main() {
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		print(err)
+	}
+	err = db.Database.Close()
+	fmt.Println("stop")
+	if err != nil {
+		log.Fatal(err)
 	}
 }

@@ -26,15 +26,18 @@ func LoginPost(db DB.DBController, store *sessions.CookieStore) {
 		if r.Method == "POST" {
 			pseudo := r.FormValue("pseudo")
 			spassword := r.FormValue("password")
+			fmt.Println("login yes")
 			rows, _ := db.QUERY("SELECT password FROM user WHERE pseudo = ?", pseudo)
 			for rows.Next() {
 				var password string
 				rows.Scan(&password)
+				fmt.Println("login yes")
 				err := DB.ComparePasswords(password, spassword)
 				if err != nil {
 					fmt.Println("Login failed")
 					print(err)
 				} else {
+					fmt.Println("login yes")
 					session.Values["authenticated"] = true
 					session.Values["username"] = pseudo // remplacer avec le nom d'utilisateur réel
 					err2 := session.Save(r, w)
@@ -45,7 +48,7 @@ func LoginPost(db DB.DBController, store *sessions.CookieStore) {
 					http.Redirect(w, r, "/", http.StatusSeeOther)
 				}
 			}
-
+			defer rows.Close()
 		}
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	})

@@ -24,8 +24,9 @@ func InitPostClient(db DB.DBController, store *sessions.CookieStore) {
 	}
 
 	type data struct {
-		Post        API.Article
-		Connected   bool
+		Post      API.Article
+		Connected bool
+		//Img         string
 		Commentates []commentary
 		Name        string
 	}
@@ -47,15 +48,29 @@ func InitPostClient(db DB.DBController, store *sessions.CookieStore) {
 		//	}
 		//}
 
+		//var img string
+		//row, _ := db.QUERY("SELECT profil FROM user WHERE pseudo = ?", session.Values["username"].(string))
+		//for row.Next() {
+		//	err := row.Scan(&img)
+		//	if err != nil {
+		//		http.Error(w, err.Error(), http.StatusInternalServerError)
+		//		return
+		//	}
+		//	if img != "" {
+		//		img = img
+		//	} else {
+		//		img = ""
+		//	}
+		//}
 		Data := data{
 			API.GetAPIWithKey(Title), //changer + tard
 			true,
+			//img,
 			make([]commentary, 0),
 			session.Values["username"].(string),
 		}
-
 		for _, c := range Data.Post.Commentaire {
-			Data.Commentates = append(Data.Commentates, commentary{c, db.GetUsername(c.Uuid)})
+			Data.Commentates = append(Data.Commentates, commentary{c, DB.GetUsername(db, c.Uuid)})
 		}
 
 		t, err := template.ParseFiles("./static/post.html")

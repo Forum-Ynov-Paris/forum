@@ -19,8 +19,11 @@
   </form>
   <div class="user-profile">
     <a onclick="location.href='./login'">
-      <img src="/static/img/userlogo.png" alt="Avatar">
-      {{.Name}}
+      {{ if .Img }}
+      <img src="{{ .Img }}" width=70% height=70% alt="Avatar"><a onclick="location.href='/profile'">{{ .Name}}</a>
+      {{else}}
+      <img src="static/img/userlogo.png" width=70% height=70% alt="Avatar"><a onclick="location.href='/profile'">{{ .Name}}</a>
+      {{end}}
     </a>
   </div>
 </header>
